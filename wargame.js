@@ -1,6 +1,6 @@
 const main = document.querySelector('.game');
-main.innerHTML = '&hearts; &spades; &clubs; &diamonds';
-const gameArena= elementMaker(main,'div', 'gameArena', '');
+main.innerHTML = `&hearts; &spades; &clubs; &diamonds`;
+const gameArena= maker(main,'div', 'gameArena', '');
 const message = maker(main, 'div','message','Click to Play')
 const button = maker(main,'button','button','Next Round');
 const game = {players : 2, cards:[], view:[],show:[]};
@@ -36,7 +36,7 @@ function gamer(inPlay,holder){
         const element = game.view[i];
         const first = game.cards[i].shift();
         showCard(first,element);
-        value.push(first.cardValue);
+        cardValues.push(first.cardValue);
         holder.push(first);
         game.show[i].lastChild.innerHTML += `${first.cardNumber}${first.icon}`;
         }
@@ -45,13 +45,13 @@ function gamer(inPlay,holder){
     const highValue = Math.max(...cardValues);
     console.log(highValue);
     cardValues.forEach((element,index)=>{
-        if(element>=highValue) winners.push(inPlay[i]);
+        if(element>=highValue) winners.push(inPlay[index]);
     })
     console.log(winners);
     if(winners.length>1){
         message.innerHTML += `Tie:`;
         winners.forEach(value =>{
-            message.innerHTML += `Player${v+1}`;
+            message.innerHTML += `Player${value+1}`;
         })
         message.innerHTML += `...`;
         return gamer(winners,holder);
@@ -68,10 +68,10 @@ function gamer(inPlay,holder){
 function updateScores(){
     let tempPlay=[];
     game.show.forEach((element,index)=>{
-        const cardCount = game.cards[i].length;
+        const cardCount = game.cards[index].length;
         if(cardCount){
             element.firstChild.innerHTML = `${cardCount} left`;
-            tempPlay.push(i);
+            tempPlay.push(index);
         }else{
             element.parentNode.style.opacity = 0.4;
         }
