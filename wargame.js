@@ -1,3 +1,12 @@
+//no var, only let and const vairables
+//what I need in this code: 2 players (player for class), 26 cards per player(total of 52)
+//cards specifics (values, type, colors, and suits)
+//class ideas?? (player, deck, card.. maybe gameplay?)
+//what variables can I use arrays with?? 
+//what functions do I think I will use?? I need one for gameplay, building a deck, creating messages on the browser
+// I need loops that add a point to a score box, loop through cards (figure out how to randimize it)
+
+//creating variables
 const main = document.querySelector('.game');
 main.innerHTML = `&hearts; &spades; &clubs; &diamonds`;
 const gameArena= maker(main,'div', 'gameArena', '');
@@ -8,8 +17,11 @@ const cardData = {suits:['hearts','spades','clubs','diamonds'],
 value:['2','3','4','5','6','7','8','9','10','J','Q','K','A'] }
 const deck=[];
 
+//functions to build a deck and add players
 buildDeck();
 addPlayers();
+
+//making a button to start the game
 
 button.addEventListener('click',(element)=>{
     const temp = [];
@@ -28,6 +40,7 @@ button.addEventListener('click',(element)=>{
     gamer(temp,[]);
 })
 
+//function to start game play with cards
 function gamer(inPlay,holder){
     const cardValues=[];
     console.log(inPlay);
@@ -43,6 +56,7 @@ function gamer(inPlay,holder){
     })
     const winners = [];
     const highValue = Math.max(...cardValues);
+    //i think math max helps calculate the highest value...
     console.log(highValue);
     cardValues.forEach((element,index)=>{
         if(element>=highValue) winners.push(inPlay[index]);
@@ -65,6 +79,7 @@ function gamer(inPlay,holder){
     updateScores();
 }
 
+//update score.. figure out how to create scorebox..
 function updateScores(){
     let tempPlay=[];
     game.show.forEach((element,index)=>{
@@ -83,11 +98,13 @@ function updateScores(){
     }
 }
 
+//think of a way to flip a card or show it on the browser
 function showCard(cardContents, element){
     element.innerHTML = `<div>${cardContents.cardNumber}${cardContents.icon}</div>`;
     element.style.color = cardContents.color;
 }
 
+//remember you only need two players, but the code should work if you add more.. make your code dynamic and universal
 function addPlayers(){
     let start = 0;
     let number = Math.floor(deck.length / game.players);
@@ -108,7 +125,7 @@ function addPlayers(){
     console.log(game.cards);
 }
 
-
+//card specifics, values, appearance go here, don't forget to randomize the cards..
 function buildDeck(){
     cardData.suits.forEach(suit =>{
         cardData.value.forEach((value, index) =>{
@@ -129,7 +146,7 @@ function buildDeck(){
 }
 
 
-
+//html browser function to create elements
 function maker(parent, elementType, category,html){
     const element = document.createElement(elementType);
     element.classList.add(category);
