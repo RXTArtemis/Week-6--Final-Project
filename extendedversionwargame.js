@@ -84,17 +84,10 @@ function updateScores(){
     let tempPlay=[];
     game.show.forEach((element,index)=>{
         const cardCount = game.cards[index].length;
-        if(cardCount){
-            element.firstChild.innerHTML = `${cardCount} left`;
-            tempPlay.push(index);
-        }else{
-            element.parentNode.style.opacity = 0.4;
-        }
+       
     })
     if(tempPlay.length<=1){
-        message.innerHTML = `Game Over! Player ${tempPlay[0] +1} Wins!`;
-        button.disabled = true;
-        button.textContent = 'GAME OVER';
+        console.log(`Game Over! Player ${tempPlay[0] +1} Wins!`);
     }
 }
 
