@@ -13,12 +13,10 @@ const gameArena= maker(main,'div', 'gameArena', '');
 const message = maker(main, 'div','message','Click to Play')
 const button = maker(main,'button','button','Next Round');
 const game = {players : 2, cards:[], view:[],show:[]};
-const cardData = {suits:['hearts','spades','clubs','diamonds'],
- value: ['2','3','4','5','6','7','8','9','10','J','Q','K','A'] }
-const deck=[];
+let deck=[];
 
 //functions to build a deck and add players
-buildDeck();
+deck=buildDeck();
 addPlayers();
 
 //making a button to start the game
@@ -80,6 +78,14 @@ function gamer(inPlay,holder){
 }
 
 //update score.. figure out how to create scorebox..
+class Score{
+    constructor(){
+        this.p1Score=p1Score;
+        this.p2Score=p2Score;
+        p1Score=0;
+        p2Score=0;
+    }
+}
 function updateScores(){
     let tempPlay=[];
     game.show.forEach((element,index)=>{
@@ -120,6 +126,9 @@ function addPlayers(){
 
 //card specifics, values, appearance go here, don't forget to randomize the cards..
 function buildDeck(){
+    const cardData = {suits:['hearts','spades','clubs','diamonds'],
+ value: ['2','3','4','5','6','7','8','9','10','J','Q','K','A'] }
+    const deck=[];
     cardData.suits.forEach(suit =>{
         cardData.value.forEach((value, index) =>{
             const backGroundColor = (suit == 'diamonds' || suit == 'hearts') ? 'red' : 'black';
@@ -136,6 +145,7 @@ function buildDeck(){
     deck.sort(()=>{
         return Math.random() - 0.5;
     })
+    return deck;
 }
 
 
